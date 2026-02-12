@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg"
-    width="800" height="740"
-    viewBox="0 0 800 740">
+    width="800" height="798"
+    viewBox="0 0 800 798">
     
   <rect width="100%" height="100%" fill="#FFFFFF"/>
     
-    
-    <rect x="40" y="80" width="720" height="580.8" fill="none" stroke="#008000" stroke-width="1"/>
-    <line x1="720.0" y1="80" x2="720.0" y2="660.8" stroke="#800000" stroke-width="1"/>
-    
-<text x="40" y="115.2" font-family="sans-serif" font-size="32.0" fill="#222222" text-anchor="start"><tspan font-weight="bold">Main Title</tspan></text>
-  <text x="40" y="144.64000000000001" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>This is a paragraph of introductory text that explains the purpose of this</tspan></text>
-  <text x="40" y="168.64000000000001" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>document. It contains enough words to demonstrate word wrapping in the output.</tspan></text>
-  <text x="40" y="208.0" font-family="sans-serif" font-size="25.6" fill="#222222" text-anchor="start"><tspan font-weight="bold">Features</tspan></text>
-  <text x="40" y="232.32000000000002" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>• First bullet point with some detail</tspan></text>
-  <text x="40" y="256.32000000000005" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>• Second bullet point that is a bit longer to test wrapping behavior across lines</tspan></text>
-  <text x="40" y="280.32000000000005" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>• Third point with bold text and italic text</tspan></text>
-  <text x="40" y="304.32000000000005" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>• Nested bullet one</tspan></text>
-  <text x="40" y="328.32000000000005" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>• Nested bullet two</tspan></text>
-  <text x="40" y="352.32000000000005" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>Code Example</tspan></text>
-  <text x="40" y="376.32000000000005" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>You can use inline code within paragraphs. This section shows how formatting</tspan></text>
-  <text x="40" y="400.32000000000005" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>works with mixed bold and italic styles.</tspan></text>
-  <text x="40" y="439.68000000000006" font-family="sans-serif" font-size="25.6" fill="#222222" text-anchor="start"><tspan font-weight="bold">Another Section</tspan></text>
-  <text x="40" y="464.00000000000006" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>• Item alpha</tspan></text>
-  <text x="40" y="488.00000000000006" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>• Item beta</tspan></text>
-  <text x="40" y="512.0" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>• Item gamma with code inside</tspan></text>
-  <text x="40" y="540.8" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>1.  </tspan><tspan>You can use Numbered Lists as well.</tspan></text>
-  <text x="40" y="564.8" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>2.  </tspan><tspan>Second item on the list that demonstrates test wrapping behaviour across lines</tspan></text>
-  <text x="88" y="588.8" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>1.  </tspan><tspan>Nested bullets are also supported.</tspan></text>
-  <text x="88" y="612.8" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>2.  </tspan><tspan>Nested Bullet two</tspan></text>
-  <text x="40" y="636.8" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>3.  </tspan><tspan>Back to the main line.</tspan></text>
+<text x="40" y="75.2" font-family="sans-serif" font-size="32.0" fill="#222222" text-anchor="start"><tspan font-weight="bold">Main Title</tspan></text>
+  <text x="40" y="104.64000000000001" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>This is a paragraph of introductory text that explains the purpose of this</tspan></text>
+  <text x="40" y="128.64000000000001" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>document. It contains enough words to demonstrate word wrapping in the output.</tspan></text>
+  <text x="40" y="168.0" font-family="sans-serif" font-size="25.6" fill="#222222" text-anchor="start"><tspan font-weight="bold">Features</tspan></text>
+  <text x="40" y="192.32000000000002" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>• First bullet point with some detail</tspan></text>
+  <text x="40" y="216.32000000000002" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>• Second bullet point that is a bit longer to test wrapping behavior across lines</tspan></text>
+  <text x="40" y="240.32000000000002" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>• Third point with </tspan><tspan font-weight="bold">bold text</tspan><tspan> and </tspan><tspan font-style="italic">italic text</tspan></text>
+  <text x="40" y="264.32000000000005" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>• Nested bullet one</tspan></text>
+  <text x="40" y="288.32000000000005" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>• Nested bullet two</tspan></text>
+  <text x="40" y="312.32000000000005" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>Code Example</tspan></text>
+  <text x="40" y="336.32000000000005" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>You can use </tspan><tspan font-family="monospace" fill="#c7254e">inline code</tspan><tspan> within paragraphs. This section shows how formatting</tspan></text>
+  <text x="40" y="360.32000000000005" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>works with mixed bold and italic styles.</tspan></text>
+  <text x="40" y="399.68000000000006" font-family="sans-serif" font-size="25.6" fill="#222222" text-anchor="start"><tspan font-weight="bold">Another Section</tspan></text>
+  <text x="40" y="424.00000000000006" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>• Item </tspan><tspan font-style="italic">alpha</tspan></text>
+  <text x="40" y="448.00000000000006" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>• Item </tspan><tspan font-weight="bold">beta</tspan></text>
+  <text x="40" y="472.00000000000006" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>• Item gamma </tspan><tspan font-family="monospace" fill="#c7254e">with code</tspan><tspan> inside</tspan></text>
+  <text x="40" y="500.80000000000007" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>1.  </tspan><tspan>You can use Numbered Lists as well.</tspan></text>
+  <text x="40" y="524.8000000000001" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>2.  </tspan><tspan>Second item on the list that demonstrates test wrapping behaviour across lines</tspan></text>
+  <text x="88" y="548.8000000000001" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>1.  </tspan><tspan>Nested bullets are also supported.</tspan></text>
+  <text x="88" y="572.8000000000001" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>2.  </tspan><tspan>Nested Bullet two</tspan></text>
+  <text x="40" y="596.8000000000001" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>3.  </tspan><tspan>Back to the main line.</tspan></text>
+  <text x="40" y="624.6400000000001" font-family="sans-serif" font-size="16" fill="#222222" text-anchor="start"><tspan>You can also handle up to three layers of Headers:</tspan></text>
+  <text x="40" y="667.8400000000001" font-family="sans-serif" font-size="32.0" fill="#222222" text-anchor="start"><tspan font-weight="bold">Title (#)</tspan></text>
+  <text x="40" y="708.8000000000002" font-family="sans-serif" font-size="25.6" fill="#222222" text-anchor="start"><tspan font-weight="bold">Subtitle 1 (##)</tspan></text>
+  <text x="40" y="741.7600000000002" font-family="sans-serif" font-size="20.8" fill="#222222" text-anchor="start"><tspan font-weight="bold">Subtitle 2 (###)</tspan></text>
 </svg>
