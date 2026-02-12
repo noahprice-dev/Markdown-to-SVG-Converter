@@ -334,7 +334,7 @@ def md_to_svg(
     bg_rect = "" if bg_color == "none" else f'\n  <rect width="100%" height="100%" fill="{bg_color}"/>'
     debug_lines = "" if not debug else f"""
     
-    <rect x="{_left_pad}" y="{_top_pad}" width="{content_width}" height="{y-_bottom_pad}" fill="none" stroke="#008000" stroke-width="1"/>
+    <rect x="{_left_pad}" y="{_top_pad}" width="{content_width}" height="{y -_bottom_pad}" fill="none" stroke="#008000" stroke-width="1"/>
     <line x1="{avg_char_width * max_chars + _left_pad}" y1="{_top_pad}" x2="{avg_char_width * max_chars + _left_pad}" y2="{y}" stroke="#800000" stroke-width="1"/>
     """
     
