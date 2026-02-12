@@ -1,0 +1,20 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "md-to-svg"
+version = "1.0.0"
+readme = "README.md"
+authors = [{name="Noah Price", email="nprice@pricemail.ca"}]
+description = "CLI Tool to handle converting Markdown to SVG"
+requires-python = ">=3.2"
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE"]
+
+[project.urls]
+homepage = "https://github.com/noahprice-dev/Markdown-to-SVG-Converter"
+issues = "https://github.com/noahprice-dev/Markdown-to-SVG-Converter/issues"
+
+[project.scripts]
+md-to-svg = "md_to_svg_nprice.cli:main"
