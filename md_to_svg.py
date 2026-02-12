@@ -156,18 +156,49 @@ def md_to_svg(
     inner_width: int = None,
     base_font_size: int = DEFAULT_FONT_SIZE,
     font_family: str = DEFAULT_FONT_FAMILY,
+    padding: int | list[int] = PADDING,
     bg_color: str = "none",
     text_color: str = "#222222",
     debug: bool = False,
 ) -> str:
-    content_width = inner_width if inner_width is not None else width - 2 * PADDING
+    # * Handle padding assignment.
+    if isinstance(padding, int):
+        _top_pad = padding
+        _bottom_pad = padding
+        _left_pad =  padding
+        _right_pad = padding
+    # ? CSS rules
+    if isinstance(padding, list):
+        match len(padding):
+            case 1: 
+                _top_pad = padding[0]
+                _bottom_pad = padding[0]
+                _left_pad =  padding[0]
+                _right_pad = padding[0]
+            case 2:
+                _top_pad = padding[0]
+                _bottom_pad = padding[0]
+                _left_pad =  padding[1]
+                _right_pad = padding[1]
+            case 3:
+                _top_pad = padding[0]
+                _left_pad =  padding[1]
+                _right_pad = padding[1]
+                _bottom_pad = padding[2]
+            case 4:
+                _top_pad = padding[0]
+                _left_pad =  padding[1]
+                _right_pad = padding[2]
+                _bottom_pad = padding[3]
+            case _: _top_pad = padding
     
-    avg_char_width = base_font_size  * 0.45# rough estimate for wrapping
+    # * Define max sizes
+    content_width = inner_width if inner_width is not None else width - _left_pad - _right_pad
+    avg_char_width = base_font_size  * 0.45 # rough estimate for wrapping
     max_chars = int(content_width / avg_char_width)
 
-
     elements: list[str] = []
-    y = PADDING + base_font_size  # starting y
+    y = _top_pad + base_font_size  # starting y
 
     def _emit_text_line(x, y_pos, font_size, spans_xml, anchor="start"):
         elements.append(
@@ -205,7 +236,7 @@ def md_to_svg(
             y += fs * HEADER_MARGIN_TOP
             spans = [_tspan_for(style, chunk, is_header_bold=True)
                      for style, chunk in _parse_inline(text)]
-            _emit_text_line(PADDING, y, fs, spans)
+            _emit_text_line(_left_pad, y, fs, spans)
             y += line_h * 0.4 + fs * HEADER_MARGIN_BOT
             prev_block = btype
             continue
@@ -214,12 +245,12 @@ def md_to_svg(
         if btype == "bullet":
             indent_level = block[1]
             text = block[2]
-            if prev_block in ("blank", "header", "paragraph", None):
+            if prev_block in ("blank", "header", "paragraph", "number_list", None):
                 y += base_font_size * 0.3
             fs = base_font_size
             line_h = fs * LINE_HEIGHT_FACTOR
-            x_offset = PADDING + indent_level * BULLET_INDENT
-
+            x_offset = _left_pad + indent_level * BULLET_INDENT
+            
             bullet_chars = max_chars - int((indent_level * BULLET_INDENT) / avg_char_width) - 2
             wrapped = _wrap_text(text, max(bullet_chars, 20))
 
@@ -257,11 +288,11 @@ def md_to_svg(
 
             count = number_counters[indent_level]
 
-            if prev_block in ("blank", "header", "paragraph", None):
+            if prev_block in ("blank", "header", "paragraph", "bullet", None):
                 y += base_font_size * 0.3
             fs = base_font_size
             line_h = fs * LINE_HEIGHT_FACTOR
-            x_offset = PADDING + indent_level * BULLET_INDENT
+            x_offset = _left_pad + indent_level * BULLET_INDENT
 
             num_prefix = f"{count}.  "
             pad_prefix = " " * len(num_prefix)
@@ -292,19 +323,19 @@ def md_to_svg(
             for wline in wrapped:
                 spans = [_tspan_for(style, chunk)
                          for style, chunk in _parse_inline(wline)]
-                _emit_text_line(PADDING, y, fs, spans)
+                _emit_text_line(_left_pad, y, fs, spans)
                 y += line_h
 
             prev_block = btype
             continue
 
-    total_height = height if height is not DEFAULT_HEIGHT else int(y + PADDING)
+    total_height = height if height is not DEFAULT_HEIGHT else int(y + _bottom_pad)
 
     bg_rect = "" if bg_color == "none" else f'\n  <rect width="100%" height="100%" fill="{bg_color}"/>'
     debug_lines = "" if not debug else f"""
     
-    <rect x="40" y="40" width="{content_width}" height="{y - PADDING}" fill="none" stroke="#008000" stroke-width="1"/>
-    <line x1="{avg_char_width * max_chars + 40}" y1="{PADDING}" x2="{avg_char_width * max_chars + 40}" y2="{y + PADDING}" stroke="#800000" stroke-width="1"/>
+    <rect x="{_left_pad}" y="{_top_pad}" width="{content_width}" height="{y-_bottom_pad}" fill="none" stroke="#008000" stroke-width="1"/>
+    <line x1="{avg_char_width * max_chars + _left_pad}" y1="{_top_pad}" x2="{avg_char_width * max_chars + _left_pad}" y2="{y}" stroke="#800000" stroke-width="1"/>
     """
     
     svg = f"""\
@@ -328,11 +359,20 @@ def md_to_svg(
 
 
 # ── CLI ───────────────────────────────────────────────────────────────────────
+# * Helps us format the --padding arg where we have a more detailed description required
+# * without forcing us to handle all help args with RawTextFormatHelper
+class SmartFormatter(argparse.HelpFormatter):
+
+    def _split_lines(self, text, width):
+        if text.startswith('R|'):
+            return text[2:].splitlines()  
+        # this is the RawTextHelpFormatter._split_lines
+        return argparse.HelpFormatter._split_lines(self, text, width)
 
 def main():
     parser = argparse.ArgumentParser(
         description="Convert Markdown to SVG",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
+        formatter_class=SmartFormatter,
     )
     parser.add_argument("input", help="Markdown file (use '-' for stdin)")
     parser.add_argument("-o", "--output", default=None,
@@ -342,9 +382,16 @@ def main():
     parser.add_argument("--inner-width", type=int, default=None, help="Define the full width of the inner bounding box in pixels. Default is Width - 80px (40px Padding both sides).")
     parser.add_argument("--font-size", type=int, default=DEFAULT_FONT_SIZE)
     parser.add_argument("--font-family", default=DEFAULT_FONT_FAMILY)
+    parser.add_argument("--padding", nargs='+', default=PADDING, type=int, help="R|Padding around content in px (default: 40).\n"
+                        "Accepts 1-4 values, following CSS shorthand:\n"
+                        "  1 value:  all sides\n"
+                        "  2 values: vertical | horizontal\n"
+                        "  3 values: top | horizontal | bottom\n"
+                        "  4 values: top | right | bottom | left"
+                        )
     parser.add_argument("--bg", default="#FFFFFF", help="Background color (default: White/#FFFFFF) Use with color hex-code prefixed with #. Pass 'none' for transparent background.")
     parser.add_argument("--color", default="#222222", help="Text color")
-    parser.add_argument("--debug", default=False, type=bool, help="Enables debug features like logging max line length, dimensions, and draws lines to show the scale of the inner content.")
+    parser.add_argument("--debug", default=False, type=bool, help="Enables debug features - Logs various internal param values and draws a box around the Content, as well as a line denoting the location where the text should wrap.")
 
     args = parser.parse_args()
 
@@ -354,6 +401,8 @@ def main():
         with open(args.input, "r", encoding="utf-8") as f:
             md_text = f.read()
 
+
+
     svg = md_to_svg(
         md_text,
         width=args.base_width,
@@ -361,6 +410,7 @@ def main():
         inner_width=args.inner_width,
         base_font_size=args.font_size,
         font_family=args.font_family,
+        padding=args.padding,
         bg_color=args.bg,
         text_color=args.color,
         debug=args.debug
@@ -376,3 +426,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
