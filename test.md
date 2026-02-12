@@ -1,9 +1,8 @@
 # J4T Installation
 1. Go to your "Home Screen" (Swipe up from the bottom of your phone)
-2. In the search box, enter "Play Store" to search for the "Play Store" App
-(which is a short name for Application)
+2. In the search box, enter "Play Store" to search for the "Play Store" App (which is a short name for Application)
 3. Click on the "Play Store" icon
-4. Click on the "Search" icon at the bottom of the app (the magnifying glass)
+4. Click on the "Search" icon at the bottom of the app (the magnifying glass) 
 5. At the top of the screen in the text area, enter "J4T Multitrack"
 6. At the bottom right of the screen, where the keyboard is, click on the
 magnifying glass to search for the application

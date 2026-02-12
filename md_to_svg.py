@@ -158,16 +158,17 @@ def md_to_svg(
     font_family: str = DEFAULT_FONT_FAMILY,
     bg_color: str = "none",
     text_color: str = "#222222",
+    debug: bool = False,
 ) -> str:
     content_width = inner_width if inner_width is not None else width - 2 * PADDING
     
-    avg_char_width = base_font_size  * 0.65# rough estimate for wrapping
+    avg_char_width = base_font_size  * 0.45# rough estimate for wrapping
     max_chars = int(content_width / avg_char_width)
-
-    print(f"Inner Width: " + str(inner_width))
-    print(f"Width: " + str(width))
-    print(f"Content Width: " + str(content_width))
-    print(f"Max Chars per line: " + str(max_chars))
+    if debug:
+        print(f"Inner Width: " + str(inner_width))
+        print(f"Width: " + str(width))
+        print(f"Content Width: " + str(content_width))
+        print(f"Max Chars per line: " + str(max_chars))
 
     elements: list[str] = []
     y = PADDING + base_font_size  # starting y
@@ -304,14 +305,18 @@ def md_to_svg(
     total_height = height if height is not None else int(y + PADDING)
 
     bg_rect = "" if bg_color == "none" else f'\n  <rect width="100%" height="100%" fill="{bg_color}"/>'
+    debug_lines = "" if not debug else f"""
+    <rect x="40" y="40" width="{content_width}" height="{total_height}" fill="none" stroke="#008000" stroke-width="1"/>
+    <line x1="{avg_char_width * max_chars + 40}" y1="{PADDING}" x2="{avg_char_width * max_chars + 40}" y2="{total_height - PADDING}" stroke="#800000" stroke-width="1"/>
+    """
+    
     svg = f"""\
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg"
     width="{width}" height="{total_height}"
     viewBox="0 0 {width} {total_height}">
     {bg_rect}
-    <rect x="40" y="40" width="{content_width}" height="{total_height}" fill="none" stroke="#008000" stroke-width="3"/>
-    <line x1="{avg_char_width * max_chars}" y1="40" x2="{avg_char_width * max_chars}" y2="{total_height}" stroke="#800000" stroke-width="3"/>
+    {debug_lines}
 {"  ".join(el + chr(10) for el in elements)}</svg>
 """
     return svg
@@ -334,7 +339,7 @@ def main():
     parser.add_argument("--font-family", default=DEFAULT_FONT_FAMILY)
     parser.add_argument("--bg", default="#FFFFFF", help="Background color (default: White/#FFFFFF) Use with color hex-code prefixed with #. Pass 'none' for transparent background.")
     parser.add_argument("--color", default="#222222", help="Text color")
-    
+    parser.add_argument("--debug", default=False, type=bool, help="Enables debug features like logging max line length, dimensions, and draws lines to show the scale of the inner content.")
 
     args = parser.parse_args()
 
@@ -353,6 +358,7 @@ def main():
         font_family=args.font_family,
         bg_color=args.bg,
         text_color=args.color,
+        debug=args.debug
     )
 
     if args.output:
